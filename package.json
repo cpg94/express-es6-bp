@@ -1,0 +1,21 @@
+{
+	"name": "app",
+	"version": "0.1.0",
+	"private": true,
+	"main": "dist/index.js",
+	"scripts": {
+		"watch": "noderize-scripts watch",
+		"build": "noderize-scripts build",
+		"start": "noderize-scripts start",
+		"format": "noderize-scripts format",
+		"test": "noderize-scripts test",
+		"clean": "noderize-scripts clean"
+	},
+	"devDependencies": {
+		"@noderize/scripts": "^0.4.5"
+	},
+	"dependencies": {
+		"@noderize/runtime": "^0.4.5",
+		"express": "^4.16.3"
+	}
+}

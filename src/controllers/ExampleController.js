@@ -1,4 +1,5 @@
 import { Router } from 'express'
+import { RouteError } from '../utils/routeHelpers';
 
 class ExampleController {
     constructor(){
@@ -9,7 +10,7 @@ class ExampleController {
         try {
             res.send('Example!')
         } catch (error) {
-            console.log(error)
+            RouteError(res, 'Something went wrong!');
         }
     }
 

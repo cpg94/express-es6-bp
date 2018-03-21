@@ -7,7 +7,7 @@
 		exports["app"] = factory(require("@babel/runtime/helpers/interopRequireDefault"));
 	else
 		root["app"] = factory(root["@babel/runtime/helpers/interopRequireDefault"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__) {
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -77,16 +77,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
-
 module.exports = require("express");
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -111,6 +105,12 @@ const NotFound = (req, res) => res.status(404).send({
 exports.NotFound = NotFound;
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+
+/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -124,7 +124,7 @@ module.exports = __webpack_require__(4);
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(0);
+var _interopRequireDefault = __webpack_require__(2);
 
 var _app = _interopRequireDefault(__webpack_require__(5));
 
@@ -141,41 +141,33 @@ _app.default.listen(port, () => {
 "use strict";
 
 
-var _interopRequireDefault = __webpack_require__(0);
+var _interopRequireDefault = __webpack_require__(2);
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
 
-var _express = _interopRequireDefault(__webpack_require__(1));
+var _express = _interopRequireDefault(__webpack_require__(0));
 
-var _bodyParser = _interopRequireDefault(__webpack_require__(6));
+var _ExampleController = _interopRequireDefault(__webpack_require__(6));
 
-var _ExampleController = _interopRequireDefault(__webpack_require__(7));
+var _bodyParser = _interopRequireDefault(__webpack_require__(9));
 
-var _routeHelpers = __webpack_require__(2);
+var _routeHelpers = __webpack_require__(1);
 
-const app = (0, _express.default)(); // Middleware
-
+const app = (0, _express.default)();
 app.use(_bodyParser.default.urlencoded({
   extended: false
 }));
-app.use(_bodyParser.default.json()); // Routes
-
-app.use('/', _ExampleController.default.routes());
+app.use(_bodyParser.default.json());
+app.use("/", _ExampleController.default.routes());
 app.use(_routeHelpers.NotFound);
 var _default = app;
 exports.default = _default;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("body-parser");
-
-/***/ }),
-/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -186,9 +178,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _express = __webpack_require__(1);
+var _express = __webpack_require__(0);
 
-var _routeHelpers = __webpack_require__(2);
+var _routeHelpers = __webpack_require__(1);
 
 class ExampleController {
   constructor() {
@@ -206,7 +198,7 @@ class ExampleController {
 
   async index(req, res) {
     try {
-      res.send('Example!');
+      res.send('Example Controller!');
     } catch (error) {
       (0, _routeHelpers.RouteError)(res, 'Something went wrong!');
     }
@@ -217,6 +209,14 @@ class ExampleController {
 var _default = new ExampleController();
 
 exports.default = _default;
+
+/***/ }),
+/* 7 */,
+/* 8 */,
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("body-parser");
 
 /***/ })
 /******/ ]);

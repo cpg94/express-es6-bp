@@ -35,6 +35,11 @@ async function main(){
             message: "Controller Name?",
             type: "input",
             name: "answer"
+		},
+		{
+            message: "Endpoint?",
+            type: "input",
+            name: "endpoint"
         }
     ]
     const controllerName = await inquirer.prompt(question);
@@ -42,22 +47,42 @@ async function main(){
     if(!controllerName.answer){
         console.log('💩  Controller must have a name!');
         return
-    }
-    createTemplate(controllerName.answer);
+	}
+    createTemplate(controllerName.answer, controllerName.endpoint);
 }
 
 
-async function createTemplate(name) {
-    console.log('🤓  Writing template!');
+async function createTemplate(name, endpoint) {
     try {
-        await writeFile(`./src/controllers/${name}Controller.js`, templateString(name));
-        addRoutes(name);
+		const doesExist = await readFile(`./src/controllers/${name}Controller.js`);
+		if(doesExist){
+			console.log('🙃  Controller with that name exists'); 
+			const question = [
+				{
+					message: "Try again? (Y/N)",
+					type: "input",
+					name: "answer"
+				}
+			]
+			const tryAgain = await inquirer.prompt(question);
+
+			if(tryAgain.answer.toUpperCase() === "Y"){
+				main();
+			} else {
+				console.log('👋  Goodbye!');
+			}
+			
+		} else {
+			console.log('🤓  Writing template!');
+			await writeFile(`./src/controllers/${name}Controller.js`, templateString(name));
+        	addRoutes(name, endpoint);
+		}
     } catch (error) {
        console.log('🙃  Error writing controller file', error); 
     }
 }
 
-async function addRoutes(routeName) {
+async function addRoutes(routeName, endpoint) {
     const app = await readFile('./src/app.js');
     const { tree, locations, comments } = parseModuleWithLocation(app.toString('utf-8'));
 
@@ -107,7 +132,7 @@ async function addRoutes(routeName) {
 				property: 'use'
 			},
 			arguments: [
-				{ type: 'LiteralStringExpression', value: `/${routeName.toLowerCase()}` },
+				{ type: 'LiteralStringExpression', value: `/${endpoint.toLowerCase()}` },
 				{
 					type: 'CallExpression',
 					callee: {

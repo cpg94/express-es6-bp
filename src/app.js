@@ -5,6 +5,6 @@ import { NotFound } from "./utils/routeHelpers";
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use("/example", ExampleController.routes());
+app.use("/", ExampleController.routes());
 app.use(NotFound);
 export default app;

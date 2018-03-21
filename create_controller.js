@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const path = require('path');
 const { readFile, writeFile } = require('fs-extra');
 const { parseModuleWithLocation } = require('shift-parser');
 const codegen = require('shift-codegen');
@@ -29,62 +30,42 @@ class ${name}Controller {
 export default new ${name}Controller();`
 
 
-async function main(){
-    const question = [
-        {
-            message: "Controller Name?",
-            type: "input",
-            name: "answer"
+async function main() {
+	const question = [
+		{
+			message: "Controller Name?",
+			type: "input",
+			name: "answer"
 		},
 		{
-            message: "Endpoint?",
-            type: "input",
-            name: "endpoint"
-        }
-    ]
-    const controllerName = await inquirer.prompt(question);
+			message: "Endpoint?",
+			type: "input",
+			name: "endpoint"
+		}
+	]
+	const controllerName = await inquirer.prompt(question);
 
-    if(!controllerName.answer){
-        console.log('💩  Controller must have a name!');
-        return
+	if (!controllerName.answer) {
+		console.log('💩  Controller must have a name!');
+		return
 	}
-    createTemplate(controllerName.answer, controllerName.endpoint);
+	createTemplate(controllerName.answer, controllerName.endpoint);
 }
 
 
 async function createTemplate(name, endpoint) {
-    try {
-		const doesExist = await readFile(`./src/controllers/${name}Controller.js`);
-		if(doesExist){
-			console.log('🙃  Controller with that name exists'); 
-			const question = [
-				{
-					message: "Try again? (Y/N)",
-					type: "input",
-					name: "answer"
-				}
-			]
-			const tryAgain = await inquirer.prompt(question);
-
-			if(tryAgain.answer.toUpperCase() === "Y"){
-				main();
-			} else {
-				console.log('👋  Goodbye!');
-			}
-			
-		} else {
-			console.log('🤓  Writing template!');
-			await writeFile(`./src/controllers/${name}Controller.js`, templateString(name));
-        	addRoutes(name, endpoint);
-		}
-    } catch (error) {
-       console.log('🙃  Error writing controller file', error); 
-    }
+	try {
+		console.log('🤓  Writing template!');
+		await writeFile(path.join(__dirname, './src/controllers/', `${name}Controller.js`), templateString(name));
+		addRoutes(name, endpoint);
+	} catch (error) {
+		console.log('🙃  Error writing controller file', error);
+	}
 }
 
 async function addRoutes(routeName, endpoint) {
-    const app = await readFile('./src/app.js');
-    const { tree, locations, comments } = parseModuleWithLocation(app.toString('utf-8'));
+	const app = await readFile('./src/app.js');
+	const { tree, locations, comments } = parseModuleWithLocation(app.toString('utf-8'));
 
 	let exists = false;
 	let lastCtrlIdx = null;
@@ -144,13 +125,13 @@ async function addRoutes(routeName, endpoint) {
 				}
 			]
 		}
-    });
+	});
 
-    await writeFile(`./src/app.js`, prettier.format(codegen.default(tree)));
-    setDone()    
+	await writeFile(`./src/app.js`, prettier.format(codegen.default(tree)));
+	setDone()
 }
 
 function setDone() {
-    console.log('🎉  Done!');
+	console.log('🎉  Done!');
 }
 main();

@@ -11,6 +11,9 @@ Start Dev Env - `yarn watch`
 
 Production Build - `yarn build`
 
-Controller CLI - `yarn create-controller`
+Create Controller CLI - `yarn create-controller`
+Delete Controller CLI - `yarn delete-controller`
+
+Note: You can only delete controllers through the CLI that you have added with it.
 
 🤓

@@ -27,15 +27,15 @@ async function main() {
 async function lookForController(name) {
     try {
         await unlink(path.join(__dirname, './src/controllers/', `${name}Controller.js`));
-        console.log(`${emoji.get("skull_and_crossbones")} Deleted ${name}Controller.js!`);
+        console.log(`${emoji.get("skull_and_crossbones")}  Deleted ${name}Controller.js!`);
         deleteRoutes(name);
     } catch (error) {
-        console.log(`${emoji.get("skull_and_crossbones")} Can not find that controller!`);
+        console.log(`${emoji.get("skull_and_crossbones")}  Can not find that controller!`);
     }
 }
 
 async function deleteRoutes(name) {
-    console.log(`${emoji.get("thinking_face")} Removing imports and routes from app.js!`);
+    console.log(`${emoji.get("thinking_face")}  Removing imports and routes from app.js!`);
     const app = await readFile('./src/app.js');
     const { tree, locations, comments } = parseModuleWithLocation(app.toString("utf-8"));
 
@@ -73,7 +73,7 @@ async function deleteRoutes(name) {
 }
 
 function setDone() {
-    console.log(`${emoji.get('wastebasket')} Deleted!`)
+    console.log(`${emoji.get('wastebasket')}  Deleted!`)
 }
 
 

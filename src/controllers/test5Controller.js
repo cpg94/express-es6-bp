@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { RouteError } from '../utils/routeHelpers';
 
-class ExampleController {
+class test5Controller {
     constructor(){
         this.router = new Router();
     }
@@ -20,4 +20,4 @@ class ExampleController {
     }
 }
 
-export default new ExampleController();
+export default new test5Controller();

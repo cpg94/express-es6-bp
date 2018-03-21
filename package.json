@@ -10,7 +10,8 @@
 		"format": "noderize-scripts format",
 		"test": "noderize-scripts test",
 		"clean": "noderize-scripts clean",
-		"create-controller": "node ./create_controller.js"
+		"create-controller": "node ./create_controller.js",
+		"delete-controller": "node ./delete_controller.js"
 	},
 	"devDependencies": {
 		"@noderize/scripts": "^0.4.5"
@@ -21,6 +22,7 @@
 		"express": "^4.16.3",
 		"fs-extra": "^5.0.0",
 		"inquirer": "^5.1.0",
+		"node-emoji": "^1.8.1",
 		"prettier": "^1.11.1",
 		"shift-codegen": "^5.0.5",
 		"shift-parser": "^5.2.3"

@@ -8,7 +8,7 @@ class ExampleController {
 
     async index(req, res){
         try {
-            res.send('Example Controller!')
+            res.send('Example!')
         } catch (error) {
             RouteError(res, 'Something went wrong!');
         }

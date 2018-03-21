@@ -10,7 +10,7 @@
 		"format": "noderize-scripts format",
 		"test": "noderize-scripts test",
 		"clean": "noderize-scripts clean",
-		"create-controller": "node ./cli/create_controller.js"
+		"create-controller": "node ./create_controller.js"
 	},
 	"devDependencies": {
 		"@noderize/scripts": "^0.4.5"

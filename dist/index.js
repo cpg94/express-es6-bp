@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -112,13 +112,19 @@ exports.NotFound = NotFound;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(4);
-
+module.exports = require("mongoose");
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(5);
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -126,16 +132,24 @@ module.exports = __webpack_require__(4);
 
 var _interopRequireDefault = __webpack_require__(0);
 
-var _app = _interopRequireDefault(__webpack_require__(5));
+var _app = _interopRequireDefault(__webpack_require__(6));
+
+var _db = _interopRequireDefault(__webpack_require__(14));
 
 const port = parseInt(process.env.PORT) || 3000;
+
+_db.default.connect('mongodb://localhost:27017/doggo').then(res => {
+  console.log('Connected to DB');
+}).catch(err => {
+  console.log(err);
+});
 
 _app.default.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -150,9 +164,11 @@ exports.default = void 0;
 
 var _express = _interopRequireDefault(__webpack_require__(1));
 
-var _ExampleController = _interopRequireDefault(__webpack_require__(6));
+var _ExampleController = _interopRequireDefault(__webpack_require__(7));
 
-var _bodyParser = _interopRequireDefault(__webpack_require__(7));
+var _UserController = _interopRequireDefault(__webpack_require__(8));
+
+var _bodyParser = _interopRequireDefault(__webpack_require__(13));
 
 var _routeHelpers = __webpack_require__(2);
 
@@ -162,12 +178,13 @@ app.use(_bodyParser.default.urlencoded({
 }));
 app.use(_bodyParser.default.json());
 app.use("/", _ExampleController.default.routes());
+app.use("/user", _UserController.default.routes());
 app.use(_routeHelpers.NotFound);
 var _default = app;
 exports.default = _default;
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -211,10 +228,39 @@ var _default = new ExampleController();
 exports.default = _default;
 
 /***/ }),
-/* 7 */
+/* 8 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: Error: ENOENT: no such file or directory, open '/Users/chrisgolding/Documents/Code/doggo/express-es6-bp/src/controllers/UserController.js'");
+
+/***/ }),
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */,
+/* 13 */
 /***/ (function(module, exports) {
 
 module.exports = require("body-parser");
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(0);
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _mongoose = _interopRequireDefault(__webpack_require__(3));
+
+var _default = _mongoose.default;
+exports.default = _default;
 
 /***/ })
 /******/ ]);

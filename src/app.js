@@ -1,10 +1,12 @@
 import express from "express";
 import ExampleController from "./controllers/ExampleController";
+import UserController from "./controllers/UserController";
 import bodyParser from "body-parser";
 import { NotFound } from "./utils/routeHelpers";
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/", ExampleController.routes());
+app.use("/user", UserController.routes());
 app.use(NotFound);
 export default app;

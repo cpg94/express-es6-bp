@@ -1,20 +1,31 @@
-# express-es6-bp
-Simple ES6 Express boilerplate, with cli to create controllers.
+# Express ES6 Boilerplate.
 
-**Getting Started**
+Simple Express ES6 boilerplate, built with [Noderize](https://noderize.js.org/). Includes handy tool to create and delete routes through a CLI too! 😄
 
-In root project folder run: `yarn` to install dependencies,
 
-Then...
+## Getting Started.
 
-Start Dev Env - `yarn watch`
+Install dependencies, in root project folder run:
 
-Production Build - `yarn build`
+> yarn
 
-Create Controller CLI - `yarn create-controller`
+To start development server, run - (this will start server at localhost:3000):
+> yarn watch
 
-Delete Controller CLI - `yarn delete-controller`
+To build for production:
+> yarn build
 
-Note: You can only delete controllers that you have added through the CLI.
+## CLI tools.
 
-🤓
+I've added a couple of CLI tools to help create/delete controllers. These create new controller files and also add the routes to your app!
+
+To create run:
+>yarn create-controller
+
+To delete run:
+>yarn delete-controller
+
+**You can only delete controllers that you've added through CLI!**
+
+Have fun! 😎
+

@@ -11,16 +11,21 @@ async function askQuestion(questions) {
 }
 
 async function main() {
-    const question = [
-        {
-            message: "Controller Name?",
-            type: "input",
-            name: "answer"
-        }
-    ]
-    const controllerName = await askQuestion(question);
-    const { answer } = controllerName;
-    lookForController(answer);
+    try {
+        const question = [
+            {
+                message: "Controller Name?",
+                type: "input",
+                name: "answer"
+            }
+        ]
+        const controllerName = await askQuestion(question);
+        const { answer } = controllerName;
+        lookForController(answer);
+    } 
+    catch (error){
+        throw error;
+    }
 }
 
 
